@@ -1,3 +1,6 @@
 .MySelect {
-  
+  border: 1px solid teal;
+  border-radius: 8px;
+  padding: 5px;
+  color: teal;
 }

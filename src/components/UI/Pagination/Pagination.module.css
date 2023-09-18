@@ -1,0 +1,21 @@
+.Pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.PaginationBtn {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid teal;
+  color: teal
+}
+
+.PaginationBtnActive {
+  background: teal;
+  color: #fff;
+
+}

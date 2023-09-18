@@ -3,14 +3,14 @@ import { PostItem } from '../PostItem/PostItem';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 export const PostList = (props) => {
-  const {posts, remove} = props
+  const {posts, remove, title} = props
 
   if(!posts.length) {
     return <h1 style={{textAlign: 'center'}}>Посты не найдены</h1>
   }
   return (
     <div className={cls.PostList}>
-      <h1 style={{textAlign: 'center'}}>Список постов</h1>
+      <h1 style={{textAlign: 'center'}}>{title}</h1>
       <TransitionGroup>
       {posts.map((post, index) =>
         <CSSTransition
