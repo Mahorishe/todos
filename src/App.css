@@ -1,3 +1,7 @@
 .App {
   width: 600px;
 }
+
+hr {
+  margin: 15px 0;
+}
