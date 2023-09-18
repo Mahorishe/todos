@@ -6,6 +6,8 @@ import { MyButton } from './components/UI/MyButton/MyButton';
 import { PostForm } from './components/PostForm/PostForm';
 import { MySelect } from './components/UI/MySelect/MySelect';
 import { PostFilter } from './components/PostFilter/PostFilter';
+import { MyModal } from './components/UI/MyModal/MyModal';
+import { usePosts } from './hooks/usePosts';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -14,18 +16,10 @@ function App() {
     {id: 3, title: 'C#', body: 'Description'}
   ])
 
- const [filter, setFilter] = useState({sort: '', query: ''})
+  const [filter, setFilter] = useState({sort: '', query: ''})
+  const [visible, setVisible] = useState(false)
 
-  const sortedPost = useMemo(() => {
-    if(filter.sort) {
-      return [...posts].sort((a,b) => a[filter.sort].localeCompare(b[filter.sort]))
-    }
-    return posts
-  }, [filter.sort, posts])
-
-  const sortedAndSearchPost = useMemo(() => {
-      return sortedPost.filter((post) => post.title.toLocaleLowerCase().includes(filter.query.toLocaleLowerCase()))
-  }, [filter.query, sortedPost])
+  const sortedAndSearchPost = usePosts(posts, filter.sort, filter.query)
 
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
@@ -33,13 +27,16 @@ function App() {
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
+    setVisible(false)
   }
   return (
     <div className="App">
-      <PostForm create={createPost} />
-      <hr />
+      <MyButton onClick={() => setVisible(true)}>Создать пост</MyButton>
+      <MyModal visible={visible} setVisible={setVisible}>
+        <PostForm create={createPost} />
+      </MyModal>
       <PostFilter filter={filter} setFilter={setFilter} />
-      {sortedAndSearchPost.length ? <PostList posts={sortedAndSearchPost} remove={removePost} />: <h1 style={{textAlign: 'center'}}>Посты не найдены</h1>}
+      <PostList posts={sortedAndSearchPost} remove={removePost} />
     </div>
   );
 }
