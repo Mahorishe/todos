@@ -1,8 +1,9 @@
-import { MyButton } from '../MyButton/MyButton';
+import { usePagintation } from '../../../hooks/usePagination'
 import cls from './Pagination.module.css';
 
 export const Pagination = (props) => {
-  const {paginationArr, currentPage, setPage} = props
+  const {totalPage, currentPage, setPage} = props
+  const paginationArr = usePagintation(totalPage)
   return (
     <div className={cls.Pagination}>
       {paginationArr.map((page) => (
