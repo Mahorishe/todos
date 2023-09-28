@@ -27,6 +27,10 @@ hr {
   align-items: center;
 }
 
+.container {
+  margin-top: 50px;
+}
+
 .post-enter {
   transform: translateX(-350px);
 }
